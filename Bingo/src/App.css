@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background: #0f0f10;
+  color: white;
+  font-family: Arial;
+}
+
+/* =======================
+   צד שמאל - הגרלה
+======================= */
+.left-panel {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #2a2a2a;
+  padding: 20px;
+  gap: 20px;
+}
+
+.title {
+  font-size: 34px;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* המספר עצמו */
+.number-box {
+  font-size: 140px;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(circle at top, #2c2c2c, #141414);
+  border: 2px solid #3a3a3a;
+  border-radius: 25px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* כפתורים */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 200px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  background: #2d2d2d;
+  color: white;
+
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #3d3d3d;
+  transform: scale(1.03);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =======================
+   צד ימין - לוח
+======================= */
+.right-panel {
+  width: 68%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.bingo-board {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.column-header {
+  width: 55px;
+  padding: 8px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.cell {
+  width: 50px;
+  height: 32px;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  background: #1a1a1a;
+
+  transition: 0.15s;
+}
+
+.cell:hover {
+  background: #2a2a2a;
+}
+
+.active {
+  background: #00c853 !important;
+  color: black;
+  font-weight: bold;
+}
+
+/* אנימציה */
+.rolling {
+  animation: pulse 0.25s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
