@@ -73,6 +73,10 @@ export default function App() {
   return (
     <div className="container">
 
+      <button className="reset-button" onClick={resetGame}>
+        איפוס משחק
+      </button>
+
       <div className="left-panel">
         <h1 className="title">בינגו - כיתה ב'1</h1>
 
@@ -87,10 +91,6 @@ export default function App() {
         <div className="buttons">
           <button onClick={generateNumber} disabled={isRolling}>
             {isRolling ? "מגריל..." : "הגרל מספר"}
-          </button>
-
-          <button onClick={resetGame}>
-            איפוס משחק
           </button>
         </div>
       </div>
@@ -109,9 +109,7 @@ export default function App() {
               ).map((num) => (
                 <div
                   key={num}
-                  className={`cell ${
-                    drawnNumbers.includes(num) ? "active" : ""
-                  }`}
+                  className={`cell ${drawnNumbers.includes(num) ? "active" : ""}`}
                 >
                   {num}
                 </div>
