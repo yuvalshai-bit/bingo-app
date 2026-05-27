@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 
 export default function App() {
@@ -6,10 +6,29 @@ export default function App() {
   const [drawnNumbers, setDrawnNumbers] = useState<number[]>([]);
   const [isRolling, setIsRolling] = useState(false);
 
+  const soundRef = useRef<HTMLAudioElement | null>(null);
+
+  const playSound = () => {
+    if (!soundRef.current) {
+      soundRef.current = new Audio("/dice.mp3");
+      soundRef.current.loop = true;
+    }
+    soundRef.current.currentTime = 0;
+    soundRef.current.play();
+  };
+
+  const stopSound = () => {
+    if (soundRef.current) {
+      soundRef.current.pause();
+      soundRef.current.currentTime = 0;
+    }
+  };
+
   const generateNumber = () => {
     if (isRolling || drawnNumbers.length >= 75) return;
 
     setIsRolling(true);
+    playSound();
 
     let count = 0;
 
@@ -30,6 +49,8 @@ export default function App() {
         setCurrentNumber(finalNum);
         setDrawnNumbers((prev) => [...prev, finalNum]);
         setIsRolling(false);
+
+        stopSound();
       }
     }, 70);
   };
@@ -38,9 +59,9 @@ export default function App() {
     setCurrentNumber(null);
     setDrawnNumbers([]);
     setIsRolling(false);
+    stopSound();
   };
 
-  // 🔥 סדר חדש: גדולים משמאל, קטנים מימין
   const columns = [
     { label: "ו", range: [61, 75], color: "#b84dff" },
     { label: "ג", range: [46, 60], color: "#4dd2ff" },
@@ -53,12 +74,10 @@ export default function App() {
     <div className="container">
 
       <div className="left-panel">
-        <h1 className="title">
-          בינגו - כיתה ב׳ בית ספר אמירים
-        </h1>
+        <h1 className="title">בינגו - כיתה ב'1</h1>
 
         <div className={`number-box ${isRolling ? "rolling" : ""}`}>
-          {currentNumber ?? "התחל"}
+          {currentNumber ?? <span className="start-text">התחל</span>}
         </div>
 
         <div className="under-number-text">
@@ -68,6 +87,10 @@ export default function App() {
         <div className="buttons">
           <button onClick={generateNumber} disabled={isRolling}>
             {isRolling ? "מגריל..." : "הגרל מספר"}
+          </button>
+
+          <button onClick={resetGame}>
+            איפוס משחק
           </button>
         </div>
       </div>
@@ -96,12 +119,6 @@ export default function App() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="reset-container">
-        <button className="reset-btn" onClick={resetGame}>
-          איפוס משחק
-        </button>
       </div>
 
     </div>

@@ -1,13 +1,31 @@
 .container {
   display: flex;
   height: 100vh;
-  background: #0f0f10;
-  color: white;
   font-family: Arial;
+  overflow: hidden;
+  color: #1f1f1f;
+
+  /* שמיים ורוד-תכלת */
+  background: linear-gradient(135deg, #a8e6ff 0%, #ffd1e8 50%, #c7d2fe 100%);
+  position: relative;
+}
+
+/* עננים */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 20%, transparent 60%),
+    radial-gradient(circle at 60% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 25%, transparent 65%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 25%, transparent 70%),
+    radial-gradient(circle at 30% 80%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.25) 25%, transparent 70%);
+  pointer-events: none;
+  filter: blur(2px);
 }
 
 /* =======================
-   צד שמאל - הגרלה
+   צד שמאל
 ======================= */
 .left-panel {
   width: 32%;
@@ -15,19 +33,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #2a2a2a;
+  border-right: 1px solid rgba(0,0,0,0.08);
   padding: 20px;
-  gap: 20px;
+  gap: 18px;
+  z-index: 2;
 }
 
 .title {
-  font-size: 34px;
-  margin: 0;
-  color: #ffffff;
-  letter-spacing: 1px;
+  font-size: 36px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #1f2937;
 }
 
-/* המספר עצמו */
 .number-box {
   font-size: 140px;
   width: 260px;
@@ -36,14 +54,25 @@
   align-items: center;
   justify-content: center;
 
-  background: radial-gradient(circle at top, #2c2c2c, #141414);
-  border: 2px solid #3a3a3a;
+  background: rgba(255,255,255,0.75);
+  border: 2px solid rgba(255,255,255,0.9);
   border-radius: 25px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  backdrop-filter: blur(10px);
+  color: #111827;
 }
 
-/* כפתורים */
+.start-text {
+  font-size: 32px;
+}
+
+.under-number-text {
+  font-size: 14px;
+  opacity: 0.7;
+  color: #374151;
+}
+
 .buttons {
   display: flex;
   flex-direction: column;
@@ -56,18 +85,20 @@ button {
   padding: 12px;
   font-size: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
 
-  background: #2d2d2d;
+  background: linear-gradient(135deg, #ff7ac6, #5cc8ff);
   color: white;
+  font-weight: bold;
 
   transition: 0.2s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 button:hover {
-  background: #3d3d3d;
-  transform: scale(1.03);
+  transform: scale(1.05);
+  filter: brightness(1.05);
 }
 
 button:disabled {
@@ -76,7 +107,7 @@ button:disabled {
 }
 
 /* =======================
-   צד ימין - לוח
+   צד ימין
 ======================= */
 .right-panel {
   width: 68%;
@@ -84,11 +115,14 @@ button:disabled {
   justify-content: center;
   align-items: flex-start;
   padding-top: 20px;
+  z-index: 2;
 }
 
 .bingo-board {
   display: flex;
-  gap: 10px;
+  gap: 16px;
+  transform: scale(1.15);
+  transform-origin: top center;
 }
 
 .column {
@@ -98,36 +132,44 @@ button:disabled {
 }
 
 .column-header {
-  width: 55px;
-  padding: 8px;
+  width: 70px;
+  padding: 10px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 6px;
   text-align: center;
+  font-size: 15px;
+
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0.05);
+  color: #111827;
 }
 
 .cell {
-  width: 50px;
-  height: 32px;
-  border: 1px solid #333;
+  width: 70px;
+  height: 44px;
+  border: 1px solid rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 12px;
-  background: #1a1a1a;
+  font-size: 16px;
+  font-weight: 500;
 
+  background: rgba(255,255,255,0.6);
   transition: 0.15s;
+  color: #111827;
 }
 
 .cell:hover {
-  background: #2a2a2a;
+  background: rgba(255,255,255,0.9);
 }
 
 .active {
-  background: #00c853 !important;
-  color: black;
+  background: linear-gradient(135deg, #ff7ac6, #5cc8ff) !important;
+  color: white;
   font-weight: bold;
+  box-shadow: 0 0 15px rgba(92, 200, 255, 0.4);
 }
 
 /* אנימציה */
